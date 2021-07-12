@@ -1,7 +1,7 @@
 <template>
   <section class="produtos-container">
       <transition mode="out-in">
-          <div v-if="true" class="produtos" key="produtos">
+          <div v-if="false" class="produtos" key="produtos">
             <div class="produto" v-for="produto in produtos" :key="produto.id">
                 <router-link :to="{name: 'produto', params: {id: produto.id}}">
                     <img :src="produto.fotos[0]" :alt="produto.fotos[0].titulo">

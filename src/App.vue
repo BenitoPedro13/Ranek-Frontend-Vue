@@ -107,19 +107,17 @@ export default {
     border-color: #87f;
   }
 
-  .v-enter, v-leave-to {
-    opacity: 0;
-  }
-
   .v-enter {
-    transition: translate3d(0, -20px, 0);
-  } 
+    opacity: 0;
+    transform: translate3d(0, -20px, 0);
+  }
 
   .v-leave-to {
-    transition: translate3d(0, 20px, 0);
+    opacity: 0;
+    transform: translateY(20px);
   }
 
-  .v-enter-active, v-leave-active {
+  .v-enter-active, .v-leave-active {
     transition: all .3s;
   }
 </style>
