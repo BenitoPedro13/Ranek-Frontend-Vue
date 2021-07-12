@@ -6,11 +6,18 @@ const axiosInstance = axios.create({
 
 export const api = {
     get(endpoint) {
-        return axios.get(endpoint)
+        return axiosInstance.get(endpoint)
     },
     post(endpoint, body) {
-        return axiosInstance(endpoint, body)
-    }
+        return axiosInstance.post(endpoint, body)
+    },
+    put(endpoint, body) {
+        return axiosInstance.put(endpoint, body)
+    },
+    delete(endpoint) {
+        return axiosInstance.delete(endpoint)
+    },
+    
 }
 
 export function getCep(cep) {

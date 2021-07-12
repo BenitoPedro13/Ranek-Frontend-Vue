@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "name": "New York Pizza",
+        "image": "/images qny-pizza.jpg",
+        "desc": "New York-style pizza has slices that are large and wide with a thin crust tha is foldable yet crispy.",
+        "price": 8
+    },
+    {
+        "id": 2,
+        "name": "San Francisco Pizza",
+        "image": "/images/sf-pizza.jpg",
+        "desc": "San Francisco-style pizza has slices that are large and wide with a thin crust tha is foldable yet crispy.",
+        "price": 10
+    },
+    {
+        "id": 3,
+        "name": "Dallas Pizza",
+        "image": "/images/da-pizza.jpg",
+        "desc": "Dallas-style pizza has slices that are large and wide with a thin crust tha is foldable yet crispy.",
+        "price": 7
+    },
+    {
+        "id": 4,
+        "name": "Chicago Pizza",
+        "image": "/images/ch-pizza.jpg",
+        "desc": "Chicago-style pizza has slices that are large and wide with a thin crust tha is foldable yet crispy.",
+        "price": 9
+    }
+]

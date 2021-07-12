@@ -1,12 +1,16 @@
-import { shallowMount } from '@vue/test-utils'
-import HelloWorld from '@/components/HelloWorld.vue'
+import pizzas from './data.json'
 
-describe('HelloWorld.vue', () => {
-  it('renders props.msg when passed', () => {
-    const msg = 'new message'
-    const wrapper = shallowMount(HelloWorld, {
-      propsData: { msg }
-    })
-    expect(wrapper.text()).toMatch(msg)
-  })
+test('the pizzaa data is correct', () => {
+  expect(pizzas).toMatchSnapshot()
+  expect(pizzas).toHaveLength(4)
+  expect(pizzas.map(pizza => pizza.name)).toEqual([
+    'New York Pizza',
+    'San Francisco Pizza',
+    'Dallas Pizza',
+    'Chicago Pizza'
+  ])
 })
+
+for(let i = 0; i < pizzas.length; i++){
+  test()
+}
