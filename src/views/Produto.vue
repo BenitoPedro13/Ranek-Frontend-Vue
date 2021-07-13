@@ -24,7 +24,7 @@
 <script>
 import PaginaCarregando from '@/components/PaginaCarregando.vue'
 import FinalizarCompra from '@/components/FinalizarCompra.vue'
-import api from '../services.js'
+import {api} from '../services.js'
 
 export default {
     name: 'Produto',

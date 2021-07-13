@@ -31,6 +31,7 @@ export default new Vuex.Store({
     },
     UPDATE_USUARIO(state, payload) {
       state.usuario = Object.assign(state.usuario, payload)
+      state.usuario.id = payload.email
     },
     UPDATE_USUARIO_PRODUTOS(state, payload) {
       state.usuario_produtos = payload
@@ -41,7 +42,7 @@ export default new Vuex.Store({
   },
   actions: {
     async getUsuarioProdutos(context){
-      const produtosJson = await api.get(`/produtos?usuario_id=${context.state.usuario.id}`)
+      const produtosJson = await api.get(`/produto?usuario_id=${context.state.usuario.id}`)
       context.commit('UPDATE_USUARIO_PRODUTOS', produtosJson.data)
     },
     async getUsuario(context, payload){

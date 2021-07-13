@@ -1,7 +1,7 @@
 <template>
   <section class="produtos-container">
       <transition mode="out-in">
-          <div v-if="false" class="produtos" key="produtos">
+          <div v-if="produtos && produtos.length > 0" class="produtos" key="produtos">
             <div class="produto" v-for="produto in produtos" :key="produto.id">
                 <router-link :to="{name: 'produto', params: {id: produto.id}}">
                     <img :src="produto.fotos[0]" :alt="produto.fotos[0].titulo">
@@ -50,7 +50,6 @@ export default {
                 this.produtosTotal = Number(produtosJson.headers['x-total-count'])
                 this.produtos = produtosJson.data
             }, 1500)
-            
         }
     },
     computed: {

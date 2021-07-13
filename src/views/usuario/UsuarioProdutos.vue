@@ -4,14 +4,13 @@
     <produtos-adicionar></produtos-adicionar>
     <h2>Seus Produtos</h2>
     <transition-group v-if="usuario_produtos" name="list" tag="ul">
-      <li v-for="(produto, index) in usuario_produtos" :key="index">
-        <produtos-item :prop="produto">
+      <li v-for="produto in usuario_produtos" :key="produto.id">
+        <produtos-item :produto="produto">
           <p class="descricao">{{produto.descricao}}</p>
           <button class="deletar" @click="deletarProduto(produto.id)">Deletar</button>
         </produtos-item>
       </li>
     </transition-group>
-    {{usuario_produtos}}
   </section>
 </template>
 
@@ -33,7 +32,7 @@ export default {
       try {
         const confirmar = window.confirm('Deseja remover este produto?')
         if(confirmar){
-          await api.delete(`produto/${id}`)
+          await api.delete(`/produto/${id}`)
           this.getUsuarioProdutos()
         }
       } catch (error) {
@@ -64,7 +63,7 @@ h2 {
 }
 
 .list-enter, .list-leave-to {
-  opacity: 0;
+  opacity: 1;
   transform: translate3d(20px, 0, 0);
 }
 
