@@ -15,7 +15,7 @@ export default {
     },
     methods: {
       buscarProdutos() {
-        this.$router.push({ query: {q: this.busca}})
+        this.$router.push({ query: {q: this.busca, _page: 1}})
       }
     }
 }
