@@ -3,7 +3,7 @@
       <div v-if="produto" class="produto">
           <ul v-if="produto.fotos" class="fotos">
               <li v-for="(foto, index) in produto.fotos" :key="index">
-                  <img src="foto.src" alt="produto.titulo">
+                  <img :src="foto.src" :alt="produto.titulo">
               </li>
           </ul>
           <div class="info">
@@ -34,19 +34,19 @@ export default {
     },
     data() {
         return {
+            id: this.$route.params.id,
             produto: null,
             finalizar: false,
         }
     },
-    props: ['id'],
     methods: {
-        getProdutos() {
-            const produtoJson = api.get(`/produto/${this.id}`)
-            this.produto = produtoJson
+        async getProdutos() {
+            const produtoJson = await api.get(`/produto/${this.id}`)
+            this.produto = produtoJson.data
         }
     },
     created() {
-        this.getProdutos
+        this.getProdutos()
     }
 }
 </script>
