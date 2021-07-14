@@ -4,9 +4,9 @@
           <div v-if="produtos && produtos.length > 0" class="produtos" key="produtos">
             <div class="produto" v-for="produto in produtos" :key="produto.id">
                 <router-link :to="{name: 'produto', params: {id: produto.id}}">
-                    <img :src="produto.fotos[0]" :alt="produto.fotos[0].titulo">
-                    <p class="preco">{ produto.preco }</p>
-                    <h2 class="titulo">{ produto.nome }</h2>
+                    <img v-if="produto.fotos[0]" :src="produto.fotos[0]" :alt="produto.fotos[0].titulo">
+                    <h2 class="titulo">{{ produto.nome }}</h2>
+                    <p class="preco">{{ produto.preco | numeroPreco}}</p>
                 </router-link>
                 
             </div>
@@ -43,13 +43,12 @@ export default {
         }
     },
     methods: {
-        getProdutos() {
+        async getProdutos() {
             this.produtos = null
-            setTimeout(async () => {
-                const produtosJson = await api.get('/produto')
-                this.produtosTotal = Number(produtosJson.headers['x-total-count'])
-                this.produtos = produtosJson.data
-            }, 1500)
+            const url = this.url
+            const produtosJson = await api.get(url)
+            this.produtosTotal = Number(produtosJson.headers['x-total-count'])
+            this.produtos = produtosJson.data
         }
     },
     computed: {
@@ -64,7 +63,7 @@ export default {
         }
     },
     created() {
-        this.getProdutos
+        this.getProdutos()
     }
 }
 </script>
