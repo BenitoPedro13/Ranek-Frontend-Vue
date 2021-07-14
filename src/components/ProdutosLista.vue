@@ -38,7 +38,7 @@ export default {
     data() {
         return {
             produtos: null,
-            produtosPorPagina: 10,
+            produtosPorPagina: 9,
             produtosTotal: 0,
         }
     },
@@ -48,6 +48,7 @@ export default {
             const url = this.url
             const produtosJson = await api.get(url)
             this.produtosTotal = Number(produtosJson.headers['x-total-count'])
+            console.log(this.produtosTotal, produtosJson)
             this.produtos = produtosJson.data
         }
     },
