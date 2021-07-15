@@ -97,6 +97,11 @@ ul {
     z-index: 1;
 }
 
+.produto:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(30, 60, 90, 0.2);
+}
+
 .produto img {
     border-radius: 4px;
     margin-bottom: 20px;
