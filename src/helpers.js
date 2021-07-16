@@ -17,7 +17,7 @@ export function mapFields(options) {
                 return this.$store.state[options.base][field];
             },
             set(value) {
-                this.$store.commit(options.mutation, { [field]: value})
+                this.$store.commit(options.mutation, {[field]: value})
             }
         }
     }

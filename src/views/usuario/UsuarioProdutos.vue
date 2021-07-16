@@ -41,7 +41,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['login', 'usuario','usuario_produtos'])
+    ...mapState(['login', 'usuario', 'usuario_produtos'])
   },
   watch: {
     login() {
