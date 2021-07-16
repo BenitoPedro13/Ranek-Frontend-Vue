@@ -78,4 +78,8 @@ export default {
     width: 200px;
 }
 
+.btn[disabled] {
+    background: gray;
+}
+
 </style>
