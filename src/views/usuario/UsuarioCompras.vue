@@ -4,7 +4,7 @@
     <div class="produtos-wrapper" v-for="(compra, index) in compras" :key="index">
       <produtos-item v-if="compra.produto" :produto="compra.produto">
         <p class="vendedor">
-          <span>Vendedor: </span> {{compra.vendedor_id}}
+          <span>Vendedor: </span> {{compra.email}}
         </p>
       </produtos-item>
     </div>
