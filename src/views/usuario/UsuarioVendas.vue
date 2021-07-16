@@ -77,7 +77,7 @@ h2 {
   margin-bottom: 20px;
 }
 
-.h3 {
+h3 {
   justify-self: end;
   margin: 0;
 }
