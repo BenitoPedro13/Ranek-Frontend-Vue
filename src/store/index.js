@@ -31,7 +31,8 @@ export default new Vuex.Store({
     },
     UPDATE_USUARIO(state, payload) {
       state.usuario = Object.assign(state.usuario, payload)
-      state.usuario.id = payload.id ? payload.email : state.usuario.id
+      const usuario_id = state.usuario.id
+      state.usuario.id = payload.id ? payload.email : usuario_id
     },
     UPDATE_USUARIO_PRODUTOS(state, payload) {
       state.usuario_produtos = payload
