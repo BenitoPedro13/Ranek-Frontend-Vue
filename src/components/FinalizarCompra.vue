@@ -2,7 +2,7 @@
   <section>
       <h2>Endereço de Envio</h2>
       <usuario-form>
-          <button @click.prevent="finalizarCompra" class="btn">Finalizar Compra</button>
+          <a @click="redirect(`https://wa.me/5521965778659?text=${mensagem}`)" class="btn">Finalizar Compra</a>
       </usuario-form>
   </section>
 </template>
@@ -17,7 +17,7 @@ export default {
     components: {
         UsuarioForm,
     },
-    props: ['produto'],
+    props: ['produto', 'mensagem'],
     computed: {
         ...mapState(['usuario']),
         compra() {
@@ -59,7 +59,11 @@ export default {
                 this.criarUsuario()
             }
             
+        },
+        redirect(link, target = '_blank') {
+            window.open(link, target);
         }
+
     }
 }
 </script>

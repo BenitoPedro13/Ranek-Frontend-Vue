@@ -7,12 +7,13 @@
               </li>
           </ul>
           <div class="info">
+              
               <h1>{{produto.nome}}</h1>
               <p class="preco">{{produto.preco | numeroPreco}}</p>
               <p class="descricao">{{produto.descricao}}</p>
               <transition mode="out-in" v-if="produto.vendido === 'false'">
-                  <button class="btn" v-if="!finalizar" @click="finalizar = true">Comprar</button>
-                  <finalizar-compra v-else :produto="produto"></finalizar-compra>    
+                  <button class="btn" v-if="!finalizar" @click="comprar">Comprar</button>
+                  <finalizar-compra v-else :mensagem="mensagem" :produto="produto"></finalizar-compra>    
               </transition>
               <button class="btn" v-else disabled>Produto Vendido</button>
           </div>
@@ -37,12 +38,17 @@ export default {
             id: this.$route.params.id,
             produto: null,
             finalizar: false,
+            mensagem: ''
         }
     },
     methods: {
         async getProdutos() {
             const produtoJson = await api.get(`/produto/${this.id}`)
             this.produto = produtoJson.data
+        },
+        async comprar() {
+            this.finalizar = true
+            this.mensagem =`Ola, gostaria de fazer um pedido:%0A%2A1x%2A ${this.produto.nome} - ${window.location.href}%0AR$ ${this.produto.preco}%0A%0A%2ATaxa de entrega:%2A Retirar no local%0A%0A%2ATotal:%2A R$ ${this.produto.preco}%0A%0A%0A----------%0A%0A%2ADados do comprador:%2A%0A${this.$store.state.usuario.nome}%0A${this.$store.state.usuario.email}%0A%0A%2AEndereço:%2A%0A${this.$store.state.usuario.rua}, ${this.$store.state.usuario.numero}, ${this.$store.state.usuario.bairro}, ${this.$store.state.usuario.cidade}, ${this.$store.state.usuario.estado}%0A${this.$store.state.usuario.cep}`
         }
     },
     created() {
