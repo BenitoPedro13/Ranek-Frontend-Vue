@@ -2,13 +2,12 @@
   <section class="produtos-container">
       <transition mode="out-in">
           <div v-if="produtos && produtos.length > 0" class="produtos" key="produtos">
-            <div class="produto" v-for="produto in produtos" :key="produto.id">
+            <div v-for="produto in produtos" :key="produto.id" class="produto">
                 <router-link :to="{name: 'produto', params: {id: produto.id}}">
                     <img v-if="produto.fotos[0]" :src="produto.fotos[0]" :alt="produto.fotos[0].titulo">
                     <h2 class="titulo">{{ produto.nome }}</h2>
                     <p class="preco">{{ produto.preco | numeroPreco}}</p>
                 </router-link>
-                
             </div>
             <produtos-paginar :produtosTotal="produtosTotal" :produtosPorPagina="produtosPorPagina"></produtos-paginar>
           </div>
@@ -48,7 +47,8 @@ export default {
             const url = this.url
             const produtosJson = await api.get(url)
             this.produtosTotal = Number(produtosJson.headers['x-total-count'])
-            this.produtos = produtosJson.data
+            const produtosDisponiveis = produtosJson.data.filter(produto => produto.vendido === 'true' ? false : true)
+            this.produtos = produtosDisponiveis
         }
     },
     computed: {
