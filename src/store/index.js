@@ -47,10 +47,19 @@ export default new Vuex.Store({
       context.commit('UPDATE_USUARIO_PRODUTOS', produtosJson.data)
     },
     async getUsuario(context, payload){
-      const usuarioJson = await api.get(`/usuario/${payload}`)
+      const usuarioJson = await api.get(`/usuario/${payload.email}`)
       context.commit('UPDATE_USUARIO', usuarioJson.data)
       context.commit('UPDATE_LOGIN', true)
       return usuarioJson
+    },
+    async logarUsuario(context, payload){
+      const response = await api.post(`/usuario/logar`, payload)
+      if(response.data.login){
+        context.commit('UPDATE_USUARIO', response.data.usuario)
+        context.commit('UPDATE_LOGIN', true)
+        return true
+      }
+      return false
     },
     async criarUsuario(context, payload) {
       context.commit('UPDATE_USUARIO', {id: payload.email})

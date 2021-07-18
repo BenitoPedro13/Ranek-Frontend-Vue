@@ -1,6 +1,7 @@
 <template>
   <div class="login">
-      <h1>Login</h1>
+      <h1 v-if="success !== false">Login</h1>
+      <h1 v-else>Algo deu errado...</h1>
       <form action="">
           <label for="email">Email</label>
           <input type="email" name="email" id="email" v-model="login.email">
@@ -28,13 +29,21 @@ export default {
             login: {
                 email: '',
                 senha: '',
-            }
+            },
+            success: null,
         }
     },
     methods: {
-        logar() {
-            this.$store.dispatch('getUsuario', this.login.email)
-            this.$router.push({name: 'usuario'})
+        async logar() {
+            const response = await this.$store.dispatch('logarUsuario', this.login)
+
+            if(response){
+                this.success = true
+                this.$router.push({name: 'usuario'}) 
+            }
+            else {
+                this.success = false
+            }
         },
     }
 }
