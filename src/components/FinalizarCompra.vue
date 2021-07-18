@@ -2,7 +2,7 @@
   <section>
       <h2>Endereço de Envio</h2>
       <usuario-form>
-          <a @click="redirect(`https://wa.me/5521965778659?text=${mensagem}`)" class="btn">Finalizar Compra</a>
+          <button @click.prevent="finalizarCompra" class="btn">Finalizar Compra</button>
       </usuario-form>
   </section>
 </template>
@@ -51,16 +51,17 @@ export default {
                 console.error(error.message)
             }
         },
-        finalizarCompra() {
+        async finalizarCompra() {
             if(this.$store.state.login){
-                this.criarTransacao()
+                await this.criarTransacao()
             }
             else {
-                this.criarUsuario()
+                await this.criarUsuario()
             }
             
         },
-        redirect(link, target = '_blank') {
+        async redirect(link, target = '_blank') {
+            await this.finalizarCompra()
             window.open(link, target);
         }
 

@@ -47,8 +47,7 @@ export default {
             const url = this.url
             const produtosJson = await api.get(url)
             this.produtosTotal = Number(produtosJson.headers['x-total-count'])
-            const produtosDisponiveis = produtosJson.data.filter(produto => produto.vendido === 'true' ? false : true)
-            this.produtos = produtosDisponiveis
+            this.produtos = produtosJson.data
         }
     },
     computed: {
