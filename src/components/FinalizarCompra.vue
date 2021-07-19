@@ -49,7 +49,7 @@ export default {
                 await this.$store.dispatch('getUsuario', this.$store.state.usuario.email)
                 await this.criarTransacao()
             } catch (error) {
-                console.error(error.message)
+                console.error(error)
             }
         },
         async finalizarCompra() {
