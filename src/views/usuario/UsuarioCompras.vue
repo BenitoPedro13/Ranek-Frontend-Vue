@@ -30,7 +30,7 @@ export default {
     async getCompras() {
       const token = String(this.usuario.token)
       console.log(token)
-      const comprasJson = await api.get(`/transacao?comprador_id=${this.usuario.id}`, Object.assign({}, {"headers": {"x-access-token": `${token}`}}))
+      const comprasJson = await api.get(`/transacao?comprador_id=${this.usuario.id}`, Object.assign({}, {headers: {['x-access-token']: token}}))
       
       this.compras = comprasJson.data
     }
