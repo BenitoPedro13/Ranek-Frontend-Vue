@@ -1,25 +1,24 @@
 import axios from 'axios'
 
 const axiosInstance = axios.create({
-    baseURL: 'https://www.quantic.digital/',
+    baseURL: 'https://www.quantic.digital/'
 })
 
 export const api = {
-    get(endpoint) {
-        return axiosInstance.get(endpoint)
+    async get(endpoint, config) {
+        return await axiosInstance.get(endpoint, config)
     },
-    post(endpoint, body) {
-        return axiosInstance.post(endpoint, body)
+    async post(endpoint, body, config) {
+        return await axiosInstance.post(endpoint, body, config)
     },
-    put(endpoint, body) {
-        return axiosInstance.put(endpoint, body)
+    async put(endpoint, body) {
+        return await axiosInstance.put(endpoint, body)
     },
-    delete(endpoint) {
-        return axiosInstance.delete(endpoint)
-    },
-    
+    async delete(endpoint, config) {
+        return await axiosInstance.delete(endpoint, config)
+    }
 }
 
-export function getCep(cep) {
-    return axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+export async function getCep(cep) {
+    return await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
 }
