@@ -52,6 +52,7 @@ export default new Vuex.Store({
       context.commit('UPDATE_USUARIO_PRODUTOS', produtosJson.data)
     },
     async getUsuario(context, payload){
+      const token = context.state.usuario.token
       const usuarioJson = await api.get(`/usuario/${payload.email}`, Object.assign({}, {headers: {['x-access-token']: token}}))
       context.commit('UPDATE_USUARIO', usuarioJson.data)
       context.commit('UPDATE_LOGIN', true)
