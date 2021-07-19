@@ -21,7 +21,15 @@ export default {
   },
   created() {
     const jwt = window.localStorage.getItem("jwt")
-    jwt ? this.$store.commit('UPDATE_USUARIO', {token: jwt}): null
+    if(jwt){
+      try {
+        const response = this.$store.dispatch('logarUsuario', {jwt: jwt})
+        response ? this.$router.push({name: 'usuario'}): null
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    
   }
 }
 </script>
