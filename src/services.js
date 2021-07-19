@@ -11,8 +11,8 @@ export const api = {
     async post(endpoint, body, config) {
         return await axiosInstance.post(endpoint, body, config)
     },
-    async put(endpoint, body) {
-        return await axiosInstance.put(endpoint, body)
+    async put(endpoint, body, config) {
+        return await axiosInstance.put(endpoint, body, config)
     },
     async delete(endpoint, config) {
         return await axiosInstance.delete(endpoint, config)
