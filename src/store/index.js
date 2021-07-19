@@ -52,8 +52,9 @@ export default new Vuex.Store({
       context.commit('UPDATE_USUARIO_PRODUTOS', produtosJson.data)
     },
     async getUsuario(context, payload){
-      const token = context.state.usuario.token
-      const usuarioJson = await api.get(`/usuario/${payload}`, Object.assign({}, {headers: {['x-access-token']: token}}))
+      const token = String(context.state.usuario.token)
+      console.log(token)
+      const usuarioJson = await api.get(`/usuario/${payload.email}`, Object.assign({}, {headers: {['x-access-token']: token}}))
       context.commit('UPDATE_USUARIO', usuarioJson.data)
       context.commit('UPDATE_LOGIN', true)
       return usuarioJson
@@ -70,7 +71,8 @@ export default new Vuex.Store({
     },
     async criarUsuario(context, payload) {
       context.commit('UPDATE_USUARIO', {id: payload.email})
-      return await api.post('/usuario', payload)
+      const response = await api.post('/usuario', payload)
+      return response
     },
     async deslogarUsuario(context) {
       const defaultUser = {
