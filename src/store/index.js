@@ -63,6 +63,7 @@ export default new Vuex.Store({
       if(response.data.login){
         context.commit('UPDATE_USUARIO', response.data.usuario)
         context.commit('UPDATE_LOGIN', true)
+        context.state.token ? window.localStorage.setItem("jwt", context.state.token): null
         return true
       }
       return false
@@ -85,6 +86,7 @@ export default new Vuex.Store({
         estado: '',
         token: ''
       }
+      window.localStorage.removeItem("jwt")
       context.commit('UPDATE_USUARIO', defaultUser)
       context.commit('UPDATE_LOGIN', false)
     }

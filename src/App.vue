@@ -18,6 +18,10 @@ export default {
   components: {
     TheHeader,
     TheFooter
+  },
+  created() {
+    const jwt = window.localStorage.getItem("jwt")
+    jwt ? this.$store.commit('UPDATE_USUARIO', {token: jwt}): null
   }
 }
 </script>
