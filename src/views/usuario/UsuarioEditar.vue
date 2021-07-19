@@ -19,7 +19,7 @@ export default {
       try {
         const token = this.$store.state.usuario.token
         await api.put(`/usuario/${this.$store.state.usuario.id}`, this.$store.state.usuario,
-        Object.assign({}, {headers: {['x-access-token']: token}}))
+        Object.assign({}, {'headers': {['x-access-token']: token}}))
         await this.$store.dispatch('getUsuario', this.$store.state.usuario)
         this.$router.push({name: 'usuario'})
       } catch (error) {
