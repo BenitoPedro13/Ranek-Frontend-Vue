@@ -38,7 +38,8 @@ export default {
     },
     methods: {
         async criarTransacao() {
-            const response = await api.post('/transacao', this.compra)
+            const token = this.usuario.token
+            const response = await api.post('/transacao', this.compra, Object.assign({}, {'headers': {'x-access-token': `${token}`}}))
             this.$router.push({name: 'compras'})
             return response
         },

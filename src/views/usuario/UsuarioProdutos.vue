@@ -30,9 +30,10 @@ export default {
     ...mapActions(['getUsuarioProdutos']),
     async deletarProduto(id) {
       try {
+        const token = this.$store.state.usuario.token
         const confirmar = window.confirm('Deseja remover este produto?')
         if(confirmar){
-          await api.delete(`/produto/${id}`)
+          await api.delete(`/produto/${id}`, Object.assign({}, {'headers': {'x-access-token': `${token}`}}))
           this.getUsuarioProdutos()
         }
       } catch (error) {

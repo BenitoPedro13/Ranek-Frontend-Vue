@@ -36,7 +36,9 @@ export default {
   },
   methods: {
     async getVendas() {
-      const vendasJson = await api.get(`/transacao?vendedor_id=${this.usuario.id}`)
+      const token = this.usuario.token
+      const vendasJson = await api.get(`/transacao?vendedor_id=${this.usuario.id}`,
+      Object.assign({}, {'headers': {'x-access-token': `${token}`}}))
       this.vendas = vendasJson.data
     }
   },

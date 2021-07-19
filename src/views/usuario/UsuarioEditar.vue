@@ -17,11 +17,13 @@ export default {
   methods: {
     async atualizarUsuario(){
       try {
-        await api.put(`/usuario/${this.$store.state.usuario.id}`, this.$store.state.usuario)
-        await this.$store.dispatch('getUsuario')
+        const token = this.$store.state.usuario.token
+        await api.put(`/usuario/${this.$store.state.usuario.id}`, this.$store.state.usuario,
+        Object.assign({}, {'headers': {'x-access-token': `${token}`}}))
+        await this.$store.dispatch('getUsuario', this.$store.state.usuario)
         this.$router.push({name: 'usuario'})
       } catch (error) {
-        console.error(error.message)
+        console.error(error)
       }
     }
   }

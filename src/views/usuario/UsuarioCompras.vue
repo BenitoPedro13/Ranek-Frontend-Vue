@@ -28,11 +28,10 @@ export default {
   },
   methods: {
     async getCompras() {
-      const comprasJson = await api.get(`/transacao?comprador_id=${this.usuario.id}`)
+      const token = String(this.usuario.token)
+      const comprasJson = await api.get(`/transacao?comprador_id=${this.usuario.id}`, Object.assign({}, {'headers': {'x-access-token': `${token}`}}))
+      
       this.compras = comprasJson.data
-    },
-    created() {
-      this.getCompras()
     }
   },
   computed: {

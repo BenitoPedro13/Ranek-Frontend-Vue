@@ -34,8 +34,9 @@ export default {
         this.produto.usuario_id = this.$store.state.usuario.id
       },
       async adicionarProduto(){
+        const token = this.$store.state.usuario.token
         this.formatarProduto()
-        await api.post('/produto', this.produto)
+        await api.post('/produto', this.produto, Object.assign({}, {'headers': {'x-access-token': `${token}`}}))
         this.$store.dispatch('getUsuarioProdutos')
       }
     }

@@ -18,7 +18,8 @@ export default new Vuex.Store({
       numero: '',
       bairro: '',
       cidade: '',
-      estado: ''
+      estado: '',
+      token: '',
     },
     usuario_produtos: null
   },
@@ -43,7 +44,11 @@ export default new Vuex.Store({
   },
   actions: {
     async getUsuarioProdutos(context){
-      const produtosJson = await api.get(`/produto?usuario_id=${context.state.usuario.id}`)
+      const produtosJson = await api.get(`/produto?usuario_id=${context.state.usuario.id}`, {
+        headers: {
+          'x-access-token': context.state.usuario.token,
+        }
+      })
       context.commit('UPDATE_USUARIO_PRODUTOS', produtosJson.data)
     },
     async getUsuario(context, payload){
@@ -76,7 +81,8 @@ export default new Vuex.Store({
         numero: '',
         bairro: '',
         cidade: '',
-        estado: ''
+        estado: '',
+        token: ''
       }
       context.commit('UPDATE_USUARIO', defaultUser)
       context.commit('UPDATE_LOGIN', false)
