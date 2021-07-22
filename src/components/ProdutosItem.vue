@@ -1,7 +1,7 @@
 <template>
     <div v-if="produto" class="produto">
         <router-link :to="{name: 'produto', params: {id: produto.id}}" class="produto-img">
-            <img v-if="produto.fotos.length > 0" :src="produto.fotos[0].src" :alt="produto.fotos[0].titulo">
+            <img v-if="produto.fotos.length > 0" :src="produto.fotos[0]" alt="">
             <p>Ver Produto</p> 
         </router-link>
         <div class="info">

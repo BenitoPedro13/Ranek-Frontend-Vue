@@ -1,11 +1,11 @@
 <template>
-  <form class="adicionar-produto">
+  <form class="adicionar-produto" enctype="multipart/form-data">
     <label for="nome">Nome</label>
     <input type="text" name="nome" id="nome" v-model="produto.nome">
     <label for="preco">Preço (R$)</label>
     <input type="number" name="preco" id="preco" v-model="produto.preco">
     <label for="fotos">Fotos</label>
-    <input type="file" name="fotos" id="fotos" ref="fotos">
+    <input type="file" @change="imageUpload" name="fotos" id="fotos" ref="fotos">
     <label for="descricao">Descriçao</label>
     <textarea name="descricao" id="descricao" cols="30" rows="10" v-model="produto.descricao">
     </textarea>
@@ -35,9 +35,22 @@ export default {
       },
       async adicionarProduto(){
         const token = this.$store.state.usuario.token
+        const headers = { 'Content-Type': 'multipart/form-data', 'x-access-token': `${token}` }
         this.formatarProduto()
-        await api.post('/produto', this.produto, Object.assign({}, {'headers': {'x-access-token': `${token}`}}))
+        const formData = new FormData()
+        formData.append('usuario_id', this.produto.usuario_id)
+        formData.append('nome', this.produto.nome)
+        formData.append('preco', this.produto.preco)
+        formData.append('descricao', this.produto.descricao)
+        formData.append('fotos', this.produto.fotos)
+        formData.append('vendido', this.produto.vendido)
+        await api.post('/produto', formData, {headers})
         this.$store.dispatch('getUsuarioProdutos')
+      },
+      imageUpload(){
+        console.log('fotos: ', this.$refs.fotos.files[0])
+        this.produto.fotos = this.$refs.fotos.files[0]
+        console.log('foto: ', this.produto.fotos);
       }
     }
 }
