@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const axiosInstance = axios.create({
-    baseURL: 'http://quantic.digital/'
+    baseURL: 'https://quantic.digital/'
 })
 
 export const api = {
